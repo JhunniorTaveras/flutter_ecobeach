@@ -17,16 +17,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final currentUser = FirebaseAuth.instance.currentUser!;
   final textcontroller = TextEditingController();
-  //PlatformFile? pickedFile;
-
-  /*Future selectfile() async {
-    final result = await FilePicker.platform.pickFiles();
-    if (result == null) return;
-
-    setState(() {
-      pickedFile = result.files.first;
-    });
-  }*/
 
   void postMessage() {
     if (textcontroller.text.isNotEmpty) {
@@ -55,7 +45,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
         title: const Text("ECOBEACH"),
-        backgroundColor: Colors.blueAccent[900],
+        backgroundColor: const Color.fromARGB(255, 13, 72, 161),
       ),
       drawer: MyDrawer(
         onSignOut: signOut,

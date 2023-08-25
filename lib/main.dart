@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: 'Red Social',
+      title: 'ECOBEACH',
       debugShowCheckedModeBanner: false,
       home: AuthPage(),
     );
