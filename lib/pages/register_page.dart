@@ -25,25 +25,24 @@ class _RegisterPageState extends State<RegisterPage> {
               child: CircularProgressIndicator(),
             ));
 
-    if (passwordTextController.text.length < 12) {
+    if (passwordTextController.text.length < 8) {
       Navigator.pop(context);
       showDialog(
           context: context,
           builder: (context) => const AlertDialog(
-                title: Text("La contraseñas debe tener minimo 12 caracteres!"),
+                title: Text("La contraseñas debe tener minimo 8 caracteres!"),
               ));
       return;
     }
-    /*
-    bool validateStructure(String value) {
-      String pattern =
-          r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
-      RegExp regExp = RegExp(pattern);
-      return regExp.hasMatch(value);
-    }*/
 
     bool validateUpperCase(String value) {
       String pattern = r'^(?=.*?[A-Z]).{8,}$';
+      RegExp regExp = RegExp(pattern);
+      return regExp.hasMatch(value);
+    }
+
+    bool validateLowerCase(String value) {
+      String pattern = r'^(?=.*?[a-z]).{8,}$';
       RegExp regExp = RegExp(pattern);
       return regExp.hasMatch(value);
     }
@@ -60,32 +59,41 @@ class _RegisterPageState extends State<RegisterPage> {
       return regExp.hasMatch(value);
     }
 
-    if (validateUpperCase(passwordTextController.text)) {
+    if (!validateSymbol(passwordTextController.text)) {
       Navigator.pop(context);
       showDialog(
           context: context,
           builder: (context) => const AlertDialog(
-                title:
-                    Text("Las contraseñas debe contener minimo una mayuscula!"),
+                title: Text(
+                    "La contraseña debe contener minimo 1 caracter especial."),
               ));
       return;
     }
-    if (validateNumber(passwordTextController.text)) {
+    if (!validateUpperCase(passwordTextController.text)) {
       Navigator.pop(context);
       showDialog(
           context: context,
           builder: (context) => const AlertDialog(
-                title: Text("Las contraseñas deben contener minimo un numero!"),
+                title: Text("La contraseña debe contener minimo 1 mayuscula."),
               ));
       return;
     }
-    if (validateSymbol(passwordTextController.text)) {
+    if (!validateLowerCase(passwordTextController.text)) {
       Navigator.pop(context);
       showDialog(
           context: context,
           builder: (context) => const AlertDialog(
-                title:
-                    Text("Las contraseñas deben contener minimo un simbolo!"),
+                title: Text("La contraseña debe contener minimo 1 minuscula."),
+              ));
+      return;
+    }
+    if (!validateNumber(passwordTextController.text)) {
+      Navigator.pop(context);
+      showDialog(
+          context: context,
+          builder: (context) => const AlertDialog(
+                title: Text(
+                    "La contraseña debe contener minimo 1 caracter numerico."),
               ));
       return;
     }
