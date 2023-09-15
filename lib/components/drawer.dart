@@ -32,6 +32,20 @@ class MyDrawer extends StatelessWidget {
               ),
 
               MyListTitle(
+                icon: Icons.history,
+                text: 'H I S T O R I A L',
+                onTap: () {},
+              ),
+
+              MyListTitle(
+                icon: Icons.settings,
+                text: 'C O N F I G',
+                onTap: () {},
+              ),
+
+              MyListTitle(icon: Icons.help, text: 'H E L P', onTap: () {}),
+
+              MyListTitle(
                 icon: Icons.logout,
                 text: 'L O G O U T',
                 onTap: onSignOut,

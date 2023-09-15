@@ -16,6 +16,51 @@ class OrderTrackingPage extends StatefulWidget {
   State<OrderTrackingPage> createState() => OrderTrackingPageState();
 }
 
+class CustomSearchDelegate extends SearchDelegate {
+  List<String> searchTerms = [''];
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return [
+      IconButton(
+        icon: const Icon(Icons.clear),
+        onPressed: () {
+          query = '';
+        },
+      )
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+      icon: const Icon(Icons.clear),
+      onPressed: () {
+        query = '';
+      },
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    return IconButton(
+      icon: const Icon(Icons.access_alarm),
+      onPressed: () {
+        query = '';
+      },
+    );
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    return IconButton(
+      icon: const Icon(Icons.access_alarm),
+      onPressed: () {
+        close(context, null);
+      },
+    );
+  }
+}
+
 class OrderTrackingPageState extends State<OrderTrackingPage> {
   final Completer<GoogleMapController> _controller = Completer();
 
@@ -101,6 +146,16 @@ class OrderTrackingPageState extends State<OrderTrackingPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("ECOBEACH"),
+        actions: [
+          IconButton(
+              onPressed: () {
+                showSearch(
+                  context: context,
+                  delegate: CustomSearchDelegate(),
+                );
+              },
+              icon: const Icon(Icons.search))
+        ],
         backgroundColor: const Color.fromARGB(255, 13, 72, 161),
       ),
       drawer: MyDrawer(
