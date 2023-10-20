@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
 import 'my_list_title.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 
 class MyDrawer extends StatelessWidget {
   final void Function()? onSignOut;
 
-  const MyDrawer({super.key, required this.onSignOut});
+  void downloadfile() {
+    FlutterDownloader.enqueue(
+      url: 'assets/manual.pdf',
+      savedDir: 'C:/Users/Admin/Downloads',
+      showNotification:
+          true, // show download progress in status bar (for Android)
+      openFileFromNotification:
+          true, // click on notification to open downloaded file (for Android)
+    );
+  }
+
+  MyDrawer({super.key, required this.onSignOut});
 
   @override
   Widget build(BuildContext context) {
@@ -32,18 +44,10 @@ class MyDrawer extends StatelessWidget {
               ),
 
               MyListTitle(
-                icon: Icons.history,
-                text: 'H I S T O R I A L',
-                onTap: () {},
+                icon: Icons.download,
+                text: 'B A C K O F F I C E',
+                onTap: downloadfile,
               ),
-
-              MyListTitle(
-                icon: Icons.settings,
-                text: 'C O N F I G',
-                onTap: () {},
-              ),
-
-              MyListTitle(icon: Icons.help, text: 'H E L P', onTap: () {}),
 
               MyListTitle(
                 icon: Icons.logout,

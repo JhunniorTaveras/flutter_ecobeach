@@ -8,6 +8,7 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:location/location.dart';
 import 'components/drawer.dart';
 import 'constants.dart';
+import 'package:order_tracker/order_tracker.dart';
 
 class OrderTrackingPage extends StatefulWidget {
   const OrderTrackingPage({Key? key}) : super(key: key);
@@ -61,11 +62,59 @@ class CustomSearchDelegate extends SearchDelegate {
   }
 }
 
+class OrderTrackerDemo extends StatefulWidget {
+  const OrderTrackerDemo({super.key, required this.title});
+  final String title;
+  @override
+  State<OrderTrackerDemo> createState() => _OrderTrackerDemoState();
+}
+
+class _OrderTrackerDemoState extends State<OrderTrackerDemo> {
+  List<TextDto> InitialOrderDataList = [
+    TextDto("Your order has been placed", ""),
+  ];
+
+  List<TextDto> OrderShippedDataList = [
+    TextDto("Your order has been shipped", ""),
+  ];
+
+  List<TextDto> OrderOutOfDeliveryDataList = [
+    TextDto("Your order is out for delivery", ""),
+  ];
+
+  List<TextDto> OrderDeviveredDataList = [
+    TextDto("Your order has been delivered", ""),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(30),
+        child: OrderTracker(
+          status: Status.delivered,
+          activeColor: Colors.blue,
+          inActiveColor: Colors.grey[300],
+          orderTitleAndDateList: InitialOrderDataList,
+          shippedTitleAndDateList: OrderShippedDataList,
+          outOfDeliveryTitleAndDateList: OrderOutOfDeliveryDataList,
+          deliveredTitleAndDateList: OrderDeviveredDataList,
+        ),
+      ),
+    );
+  }
+}
+
 class OrderTrackingPageState extends State<OrderTrackingPage> {
   final Completer<GoogleMapController> _controller = Completer();
 
-  static const LatLng sourceLocation = LatLng(37.4218, -122.0855);
-  static const LatLng destination = LatLng(37.4116, -122.0713);
+  static const LatLng sourceLocation =
+      LatLng(18.48813906054479, -69.96246698656097);
+  static const LatLng destination =
+      LatLng(18.601775799506562, -68.33475993750115);
 
   List<LatLng> polylineCoordinates = [];
   LocationData? currentLocation;
@@ -116,18 +165,18 @@ class OrderTrackingPageState extends State<OrderTrackingPage> {
   }
 
   void setCustomMarkerIcon() {
-    BitmapDescriptor.fromAssetImage(ImageConfiguration.empty,
-            "C:/Users/jtave/OneDrive/Documents/Intec/Trimestre 17/Proyecto Final Tres/ecobeach/ecobeach/assets/Pin_source.png")
+    BitmapDescriptor.fromAssetImage(
+            ImageConfiguration.empty, 'assets/Pin_source.png')
         .then((value) => (icon) {
               sourceIcon = icon;
             });
-    BitmapDescriptor.fromAssetImage(ImageConfiguration.empty,
-            "C:/Users/jtave/OneDrive/Documents/Intec/Trimestre 17/Proyecto Final Tres/ecobeach/ecobeach/assets//Pin_destination.png")
+    BitmapDescriptor.fromAssetImage(
+            ImageConfiguration.empty, 'assets/Pin_destination.png')
         .then((value) => (icon) {
               destinationIcon = icon;
             });
-    BitmapDescriptor.fromAssetImage(ImageConfiguration.empty,
-            "C:/Users/jtave/OneDrive/Documents/Intec/Trimestre 17/Proyecto Final Tres/ecobeach/ecobeach/assets//Pin_current_location.png")
+    BitmapDescriptor.fromAssetImage(
+            ImageConfiguration.empty, 'assets/Pin_current_location.png')
         .then((value) => (icon) {
               currentLocationIcon = icon;
             });

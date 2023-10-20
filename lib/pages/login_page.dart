@@ -59,9 +59,9 @@ class _LoginPageState extends State<LoginPage> {
                   height: 50,
                 ),*/
                 // ignore: prefer_const_constructors
-                Icon(
-                  Icons.lock,
-                  size: 65,
+                Image.asset(
+                  'assets/logo1.png',
+                  width: 200,
                 ),
 
                 //Welcome back message
